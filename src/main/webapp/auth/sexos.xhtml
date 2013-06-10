@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <p:fieldset legend="Cadastro de Sexos" id="fieldset">
+            <h:form id="formSexos" prependId="false">
+                <p:growl id="msg0" showDetail="true" />
+                <p:panelGrid id="gridCadastro" columns="2">
+                    <p:outputLabel value=""/>
+                    <h:inputHidden value="#{sexoBean.sexoSelecionado.id}"/>
+                    <p:outputLabel for="descsexo">Descrição: </p:outputLabel>
+                    <p:inputText id="descsexo" 
+                                 value="#{sexoBean.sexoSelecionado.descricao}" 
+                                 size="50"
+                                 required="true"
+                                 requiredMessage="Descrição é obrigatório!"
+                                 />
+                    <p:outputLabel for="descsexo">Ativo: </p:outputLabel>
+                    <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
+                </p:panelGrid>
+                <p:commandButton value="Gravar" action="#{sexoBean.salvar()}" update="formSexos :formList"/>
+            </h:form>
+        </p:fieldset>
+
+        <h:form id="formList">  
+            <p:dataTable var="registro" 
+                         value="#{sexoBean.lista}"
+                         style="width: 100%"
+                         selectionMode="single" 
+                         rowKey="#{registro.id}"
+                         emptyMessage="Não há registros!">
+                 
+                <p:ajax event="rowSelect"
+                        update=":formSexos"
+                        listener="#{sexoBean.onRowSelect}"/>  
+                 
+                <p:column headerText="Id" style="width: 100px">
+                    <h:outputText value="#{registro.id}" />
+                </p:column>
+                <p:column headerText="Nome" style="width: 200px">
+                    <h:outputText value="#{registro.descricao}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+
+    </ui:define>
+
+</ui:composition>

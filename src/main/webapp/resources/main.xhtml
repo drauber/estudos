@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/estudos/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/estudos/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>DRauber - Menu</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="top">
+            <ui:insert name="top">Barra nome do Sistema</ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <!--<ui:insert name="left">Left</ui:insert>-->
+                <h:form>
+                    <p:tieredMenu style="width:200px">  
+                        <p:submenu label="Cadastros" icon="ui-icon-disk">  
+                            <p:menuitem value="Pessoas" icon="ui-icon-person" ajax="false" />  
+                            <p:submenu label="Secundários" icon="ui-icon-newwin">  
+                                <p:menuitem value="Sexo" action="#{sexoBean.inserir()}" icon="ui-icon-heart" ajax="false" />  
+                            </p:submenu>  
+                        </p:submenu>  
+                    </p:tieredMenu>  
+                </h:form>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Conteúdo</ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>

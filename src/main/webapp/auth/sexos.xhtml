@@ -24,7 +24,9 @@
                     <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
                 </p:panelGrid>
                 <p:commandButton value="Gravar" action="#{sexoBean.salvar()}" update="formSexos :formList"/>
+                <p:commandButton value="Excluir" action="#{sexoBean.deletar()}" update="formSexos :formList"/>
             </h:form>
+
         </p:fieldset>
 
         <h:form id="formList">  
@@ -34,11 +36,11 @@
                          selectionMode="single" 
                          rowKey="#{registro.id}"
                          emptyMessage="Não há registros!">
-                 
+
                 <p:ajax event="rowSelect"
                         update=":formSexos"
                         listener="#{sexoBean.onRowSelect}"/>  
-                 
+
                 <p:column headerText="Id" style="width: 100px">
                     <h:outputText value="#{registro.id}" />
                 </p:column>

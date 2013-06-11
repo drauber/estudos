@@ -59,6 +59,8 @@ public class SexoBean {
 	
 	public String deletar(){
 		sexoDAO.delete(sexoSelecionado);
+                lista.remove(sexoSelecionado);
+                sexoSelecionado = new Sexo();
 		return PAGINA_LISTAGEM;
 	}
 	

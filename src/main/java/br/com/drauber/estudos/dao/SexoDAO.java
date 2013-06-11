@@ -9,35 +9,47 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.drauber.estudos.pojo.Sexo;
 import static br.com.drauber.estudos.util.HibernateUtil.getSession;
+import org.hibernate.Session;
 
 public class SexoDAO {
 
-	public SexoDAO(){}
-	
-	public void saveOrUpdate(Sexo sexo) {
-		getSession().saveOrUpdate(sexo);
-	}
-		
-	public void delete(Sexo sexo){
-		getSession().delete(sexo);	
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Sexo> getAll(){
-		Criteria criteria = getSession().createCriteria(Sexo.class);
-	 	return  (List<Sexo>) criteria.addOrder(Order.asc("id")).list();
-	}
+    public SexoDAO() {
+    }
 
-	//Mais sobre criteria em: http://docs.jboss.org/hibernate/orm/3.3/reference/en/html/querycriteria.html
-	@SuppressWarnings("unchecked")
-	public List<Sexo> pesquisar(String campo, Object valor){
-		Criteria criteria = getSession().createCriteria(Sexo.class);
-		if(campo.equals("id")){ //pesquisa por id
-			int i = Integer.valueOf(valor.toString().trim()); //remove os espaços antes de converter
-			criteria.add(Restrictions.eq(campo, i));
-		}else{ //pesquisa por nome
-			criteria.add(Restrictions.like(campo, "%" + valor + "%"));
-		}			
-	 	return  (List<Sexo>) criteria.addOrder(Order.asc("id")).list();
-	}
+    public void saveOrUpdate(Sexo sexo) {
+        Session s = getSession();
+        Object pDuplica = s.get(sexo.getClass(), sexo.getId());
+        if (pDuplica != null) {
+            s.evict(pDuplica);
+        }
+        s.saveOrUpdate(sexo);
+    }
+
+    public void delete(Sexo sexo) {
+        Session s = getSession();
+        Object pDuplica = s.get(sexo.getClass(), sexo.getId());
+        if (pDuplica != null) {
+            s.evict(pDuplica);
+        }
+        s.delete(sexo);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Sexo> getAll() {
+        Criteria criteria = getSession().createCriteria(Sexo.class);
+        return (List<Sexo>) criteria.addOrder(Order.asc("id")).list();
+    }
+
+    //Mais sobre criteria em: http://docs.jboss.org/hibernate/orm/3.3/reference/en/html/querycriteria.html
+    @SuppressWarnings("unchecked")
+    public List<Sexo> pesquisar(String campo, Object valor) {
+        Criteria criteria = getSession().createCriteria(Sexo.class);
+        if (campo.equals("id")) { //pesquisa por id
+            int i = Integer.valueOf(valor.toString().trim()); //remove os espaços antes de converter
+            criteria.add(Restrictions.eq(campo, i));
+        } else { //pesquisa por nome
+            criteria.add(Restrictions.like(campo, "%" + valor + "%"));
+        }
+        return (List<Sexo>) criteria.addOrder(Order.asc("id")).list();
+    }
 }

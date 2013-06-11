@@ -24,6 +24,8 @@ public class Sexo implements Serializable {
 
     //Construtores
     public Sexo() {
+        this.id = 0;
+        this.descricao="";
         this.ativo = true;
     }
 

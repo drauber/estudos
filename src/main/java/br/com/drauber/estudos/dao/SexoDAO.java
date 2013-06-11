@@ -18,9 +18,11 @@ public class SexoDAO {
 
     public void saveOrUpdate(Sexo sexo) {
         Session s = getSession();
-        Object pDuplica = s.get(sexo.getClass(), sexo.getId());
-        if (pDuplica != null) {
-            s.evict(pDuplica);
+        if (sexo.getId() != null) {
+            Object pDuplica = s.get(sexo.getClass(), sexo.getId());
+            if (pDuplica != null) {
+                s.evict(pDuplica);
+            }
         }
         s.saveOrUpdate(sexo);
     }

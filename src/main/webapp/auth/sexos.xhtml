@@ -41,6 +41,13 @@
                         update=":formSexos"
                         listener="#{sexoBean.onRowSelect}"/>  
 
+                <p:column headerText="Ativo" style="width: 15px">
+                    <h:graphicImage name="#{registro.ativo}.png" 
+                                    library="images"
+                                    width="15" 
+                                    height="15"/>
+                </p:column>
+                
                 <p:column headerText="Id" style="width: 100px">
                     <h:outputText value="#{registro.id}" />
                 </p:column>

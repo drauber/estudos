@@ -18,7 +18,7 @@ public class Sexo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 50)
+    @Column(length = 50, unique=true)
     private String descricao;
     private boolean ativo;
 

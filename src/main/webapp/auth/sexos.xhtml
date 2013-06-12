@@ -23,10 +23,30 @@
                     <p:outputLabel for="descsexo">Ativo: </p:outputLabel>
                     <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
                 </p:panelGrid>
-                <p:commandButton value="Gravar" action="#{sexoBean.salvar()}" update="formSexos :formList"/>
-                <p:commandButton value="Excluir" action="#{sexoBean.deletar()}" update="formSexos :formList"/>
-            </h:form>
+                <p:commandButton value="Gravar" action="#{sexoBean.salvar()}" update="formSexos :formList msg0"/>
+                <p:commandButton value="Excluir" onclick="cnf.show()"/>
+                <p:commandButton value="Cancelar" action="#{sexoBean.cancelar()}" update="formSexos :formList"/>
 
+                <p:confirmDialog id="confirma"
+                                 header="Confirma Exclusão"
+                                 widgetVar="cnf"
+                                 showEffect="fade"
+                                 hideEffect="explode"
+                                 position="top,center"
+                                 message="Confirma Exclusão do Sexo?">  
+                    <h:panelGrid id="display" columns="2" cellpadding="4">  
+                        <h:outputText value="Id:" />  
+                        <h:outputText value="#{sexoBean.sexoSelecionado.id}" />  
+                        <h:outputText value="Descricao:" />  
+                        <h:outputText value="#{sexoBean.sexoSelecionado.descricao}" />  
+                    </h:panelGrid>  
+                    <p:commandButton value="Sim"
+                                     oncomplete="cnf.hide()" 
+                                     update="formSexos :formList"
+                                     action="#{sexoBean.deletar()}" />  
+                    <p:commandButton value="Não" onclick="cnf.hide()"/>  
+                </p:confirmDialog>  
+            </h:form>
         </p:fieldset>
 
         <h:form id="formList">  
@@ -35,30 +55,40 @@
                          style="width: 100%"
                          selectionMode="single" 
                          rowKey="#{registro.id}"
-                         emptyMessage="Não há registros!">
+                         emptyMessage="Não há registros!"
+                         widgetVar="sexoTable">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Qualquer campo:" />
+                        <h:inputText id="globalFilter" onkeyup="sexoTable.filter()" />
+                    </p:outputPanel>
+                </f:facet>
+
 
                 <p:ajax event="rowSelect"
                         update=":formSexos"
                         listener="#{sexoBean.onRowSelect}"/>  
 
-                <p:column headerText="Ativo" style="width: 15px">
+                <p:column headerText="Ativo" style="width: 5%; text-align: center"
+                          sortBy="#{registro.ativo}">
                     <h:graphicImage name="#{registro.ativo}.png" 
                                     library="images"
                                     width="15" 
                                     height="15"/>
                 </p:column>
-                
-                <p:column headerText="Id" style="width: 100px">
+
+                <p:column headerText="Id" style="width: 5%; text-align: center"
+                          sortBy="#{registro.id}">
                     <h:outputText value="#{registro.id}" />
                 </p:column>
-                <p:column headerText="Nome" style="width: 200px">
+                <p:column headerText="Nome" style="width: 90%"
+                          sortBy="#{registro.descricao}"
+                          >
                     <h:outputText value="#{registro.descricao}" />
                 </p:column>
             </p:dataTable>
         </h:form>
-
-
-
     </ui:define>
 
 </ui:composition>

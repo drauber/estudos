@@ -8,27 +8,44 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drauber.estudos.pojo.Sexo;
+import br.com.drauber.estudos.util.HibernateUtil;
 import static br.com.drauber.estudos.util.HibernateUtil.getSession;
+import javax.faces.application.FacesMessage;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 public class SexoDAO {
+
+    SessionFactory sf;
+    Session s;
 
     public SexoDAO() {
     }
 
-    public void saveOrUpdate(Sexo sexo) {
-        Session s = getSession();
-        if (sexo.getId() != null) {
-            Object pDuplica = s.get(sexo.getClass(), sexo.getId());
-            if (pDuplica != null) {
-                s.evict(pDuplica);
+    public FacesMessage saveOrUpdate(Sexo sexo) {
+        try {
+            sf = HibernateUtil.getSessionFactory();
+            s = sf.openSession();
+            if (sexo.getId() != null) {
+                Object pDuplica = s.get(sexo.getClass(), sexo.getId());
+                if (pDuplica != null) {
+                    s.evict(pDuplica);
+                }
             }
+            s.beginTransaction();
+            s.saveOrUpdate(sexo);
+            s.getTransaction().commit();
+            return new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravado com sucesso!", "");
+        } catch (HibernateException e) {
+            return new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao gravar!", e.getMessage());
+        } finally {
+            s.close();
         }
-        s.saveOrUpdate(sexo);
     }
 
     public void delete(Sexo sexo) {
-        Session s = getSession();
+        s = getSession();
         Object pDuplica = s.get(sexo.getClass(), sexo.getId());
         if (pDuplica != null) {
             s.evict(pDuplica);

@@ -41,33 +41,16 @@ public class SexoDAO {
             return new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao gravar!", e.getMessage());
         } finally {
             s.close();
-            sf.close();
         }
     }
 
-    public FacesMessage delete(Sexo sexo) {
-
-        try {
-            sf = HibernateUtil.getSessionFactory();
-            s = sf.openSession();
-            Object pDuplica = s.get(sexo.getClass(), sexo.getId());
-            if (pDuplica != null) {
-                s.evict(pDuplica);
-            }
-            System.out.println("A");
-            s.beginTransaction();
-            System.out.println("B");
-            s.delete(sexo);
-            System.out.println("C");
-            s.getTransaction().commit();
-            System.out.println("D");
-            return new FacesMessage(FacesMessage.SEVERITY_INFO, "Excluído com sucesso!", "");
-        } catch (HibernateException e) {
-            return new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao excluir!", e.getMessage());
-        } finally {
-            s.close();
-            sf.close();
+    public void delete(Sexo sexo) {
+        s = getSession();
+        Object pDuplica = s.get(sexo.getClass(), sexo.getId());
+        if (pDuplica != null) {
+            s.evict(pDuplica);
         }
+        s.delete(sexo);
     }
 
     @SuppressWarnings("unchecked")

@@ -23,7 +23,7 @@
                 <h:form>
                     <p:tieredMenu style="width:200px">  
                         <p:submenu label="Cadastros" icon="ui-icon-disk">  
-                            <p:menuitem value="Pessoas" icon="ui-icon-person" ajax="false" />  
+                            <p:menuitem value="Pessoas" action="#{pessoaBean.inserir()}" icon="ui-icon-person" ajax="false" />  
                             <p:submenu label="Secundários" icon="ui-icon-newwin">  
                                 <p:menuitem value="Sexo" action="#{sexoBean.inserir()}" icon="ui-icon-heart" ajax="false" />  
                             </p:submenu>  

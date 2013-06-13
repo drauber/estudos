@@ -35,6 +35,7 @@ public class PessoaBean {
 
     // Métodos
     public String salvar() {
+        System.out.println("chamou salvar de PessoaBean");
         if (pessoaSelecionado.getId() == 0) {
             pessoaSelecionado.setId(null);
         }
@@ -61,6 +62,7 @@ public class PessoaBean {
     }
 
     public String deletar() {
+        System.out.println("chamou deletar() de PessoaBean");
         FacesMessage m = pessoaDAO.delete(pessoaSelecionado);
         FacesContext.getCurrentInstance().addMessage(null, m);
         lista.remove(pessoaSelecionado);

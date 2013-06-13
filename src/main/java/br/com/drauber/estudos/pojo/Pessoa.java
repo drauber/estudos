@@ -49,6 +49,7 @@ public class Pessoa implements Serializable {
     @ForeignKey(name = "fk_sexo_pessoa")
     @JoinColumn(name = "idsexo", referencedColumnName = "id")
     private Sexo sexo;
+    private boolean ativo;
 
     public Pessoa() {
         this.sexo = new Sexo();
@@ -188,6 +189,14 @@ public class Pessoa implements Serializable {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Override

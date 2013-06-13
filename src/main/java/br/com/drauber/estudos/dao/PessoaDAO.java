@@ -44,6 +44,7 @@ public class PessoaDAO {
     }
 
     public FacesMessage delete(Pessoa pessoa) {
+        System.out.println("Chamou método delete() de PessoaDAO");
         try {
             s = sf.openSession();
             Object pDuplica = s.get(pessoa.getClass(), pessoa.getId());
@@ -68,7 +69,6 @@ public class PessoaDAO {
         List<Pessoa> l = (List<Pessoa>) criteria.addOrder(Order.asc("id")).list();
         s.close();
         return l;
-        
     }
 
     //Mais sobre criteria em: http://docs.jboss.org/hibernate/orm/3.3/reference/en/html/querycriteria.html

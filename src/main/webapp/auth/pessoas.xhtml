@@ -104,7 +104,7 @@
                                 locale="pt"/>
 
                     <p:outputLabel>Ativo: </p:outputLabel>
-                    <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
+                    <h:selectBooleanCheckbox value="#{pessoasBean.pessoaSelecionado.ativo}" />
 
                 </p:panelGrid>
                 <p:commandButton value="Gravar" action="#{pessoaBean.salvar()}" update="formPessoas :formList msg0"/>
@@ -116,7 +116,6 @@
                                  widgetVar="cnf"
                                  showEffect="fade"
                                  hideEffect="explode"
-                                 position="top,center"
                                  message="Confirma Exclusão do Pessoa?">  
                     <h:panelGrid id="display" columns="2" cellpadding="4">  
                         <h:outputText value="Id:" />  
@@ -159,8 +158,7 @@
                     <h:outputText value="#{registro.id}" />
                 </p:column>
                 <p:column headerText="Nome" style="width: 90%"
-                          sortBy="#{registro.nome}"
-                          >
+                          sortBy="#{registro.nome}">
                     <h:outputText value="#{registro.nome}" />
                 </p:column>
             </p:dataTable>

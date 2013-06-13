@@ -20,8 +20,8 @@ public class PessoaBean {
     private String campoFiltro = "DESCRICAO";
     private String valorFiltro = "";
     //Constantes
-    private final String PAGINA_LISTAGEM = "auth/pessoas.xhtml";
-    private final String PAGINA_EDICAO = "auth/pessoas.xhtml";
+    private final String PAGINA_LISTAGEM = "/auth/pessoas.xhtml";
+    private final String PAGINA_EDICAO = "/auth/pessoas.xhtml";
 
     //Contrutor
     public PessoaBean() {
@@ -47,6 +47,7 @@ public class PessoaBean {
     }
 
     public String inserir() {
+        System.out.println("PESSOA");
         pessoaSelecionado = new Pessoa();
         return PAGINA_EDICAO;
     }

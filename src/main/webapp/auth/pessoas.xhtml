@@ -11,7 +11,7 @@
         <p:fieldset legend="Cadastro de Pessoas" id="fieldset">
             <h:form id="formPessoas" prependId="false">
                 <p:growl id="msg0" showDetail="true" />
-                <p:panelGrid id="gridCadastro" columns="2">
+                <p:panelGrid id="gridCadastro" columns="2" style="width: 100%">
                     <p:outputLabel value=""/>
                     <h:inputHidden value="#{pessoaBean.pessoaSelecionado.id}"/>
 
@@ -104,7 +104,7 @@
                                 locale="pt"/>
 
                     <p:outputLabel>Ativo: </p:outputLabel>
-                    <h:selectBooleanCheckbox value="#{pessoasBean.pessoaSelecionado.ativo}" />
+                    <h:selectBooleanCheckbox value="#{pessoaBean.pessoaSelecionado.ativo}" />
 
                 </p:panelGrid>
                 <p:commandButton value="Gravar" action="#{pessoaBean.salvar()}" update="formPessoas :formList msg0"/>
@@ -116,7 +116,7 @@
                                  widgetVar="cnf"
                                  showEffect="fade"
                                  hideEffect="explode"
-                                 message="Confirma Exclusão do Pessoa?">  
+                                 message="Confirma Exclusão da Pessoa?">  
                     <h:panelGrid id="display" columns="2" cellpadding="4">  
                         <h:outputText value="Id:" />  
                         <h:outputText value="#{pessoaBean.pessoaSelecionado.id}" />  

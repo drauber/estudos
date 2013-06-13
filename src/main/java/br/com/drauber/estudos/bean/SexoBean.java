@@ -20,8 +20,8 @@ public class SexoBean {
     private String campoFiltro = "DESCRICAO";
     private String valorFiltro = "";
     //Constantes
-    private final String PAGINA_LISTAGEM = "auth/sexos.xhtml";
-    private final String PAGINA_EDICAO = "auth/sexos.xhtml";
+    private final String PAGINA_LISTAGEM = "/auth/sexos.xhtml";
+    private final String PAGINA_EDICAO = "/auth/sexos.xhtml";
 
     //Contrutor
     public SexoBean() {
@@ -46,6 +46,7 @@ public class SexoBean {
     }
 
     public String inserir() {
+        System.out.println("SEXO");
         sexoSelecionado = new Sexo();
         return PAGINA_EDICAO;
     }

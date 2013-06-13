@@ -4,7 +4,8 @@
                 template="./../resources/main.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:stella="http://stella.caelum.com.br/faces2">
 
     <ui:define name="content">
         <p:fieldset legend="Cadastro de Sexos" id="fieldset">
@@ -42,7 +43,7 @@
                     </h:panelGrid>  
                     <p:commandButton value="Sim"
                                      oncomplete="cnf.hide()" 
-                                      update="formSexos :formList msg0"
+                                     update="formSexos :formList msg0"
                                      action="#{sexoBean.deletar()}" />  
                     <p:commandButton value="Não" onclick="cnf.hide()"/>  
                 </p:confirmDialog>  

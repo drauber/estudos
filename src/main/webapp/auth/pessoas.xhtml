@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:stella="http://stella.caelum.com.br/faces2">
+
+    <ui:define name="content">
+        <p:fieldset legend="Cadastro de Pessoas" id="fieldset">
+            <h:form id="formPessoas" prependId="false">
+                <p:growl id="msg0" showDetail="true" />
+                <p:panelGrid id="gridCadastro" columns="2">
+                    <p:outputLabel value=""/>
+                    <h:inputHidden value="#{pessoaBean.pessoaSelecionado.id}"/>
+
+                    <p:outputLabel for="nome">Nome: </p:outputLabel>
+                    <p:inputText id="nome" 
+                                 value="#{pessoaBean.pessoaSelecionado.nome}" 
+                                 size="80"
+                                 required="true"
+                                 requiredMessage="Nome é obrigatório!"/>
+
+                    <p:outputLabel for="apelido">Apelido: </p:outputLabel>
+                    <p:inputText id="apelido" 
+                                 value="#{pessoaBean.pessoaSelecionado.apelido}" 
+                                 size="40"
+                                 required="false"/>
+
+                    <p:outputLabel for="s">Sexo: </p:outputLabel>
+                    <p:panelGrid id="s" columns="2" styleClass="semBorda">
+                        <p:inputText id="sexo0"
+                                     value="#{pessoaBean.pessoaSelecionado.sexo.id}"
+                                     size="6">
+                        </p:inputText>
+                        <p:inputText id="sexo0desc"
+                                     value="TESTE"
+                                     size="71"
+                                     disabled="true"
+                                     styleClass="descricaoCodigo"/> 
+                    </p:panelGrid>
+
+                    <p:outputLabel for="mail">E-mail: </p:outputLabel>
+                    <p:inputText id="mail" 
+                                 value="#{pessoaBean.pessoaSelecionado.email}" 
+                                 size="80"
+                                 required="false"/>
+
+                    <p:outputLabel for="fone1">Fone: </p:outputLabel>
+                    <p:inputMask id="fone1" 
+                                 value="#{pessoaBean.pessoaSelecionado.fone1}" 
+                                 mask="(99) ?9999-9999"/>
+
+                    <p:outputLabel for="fone2">Fone Alternativo: </p:outputLabel>
+                    <p:inputMask id="fone2" 
+                                 value="#{pessoaBean.pessoaSelecionado.fone2}" 
+                                 mask="(99) ?9999-9999"/>
+
+                    <p:outputLabel for="cpf">CPF: </p:outputLabel>
+                    <p:inputMask id="cpf" 
+                                 value="#{pessoaBean.pessoaSelecionado.cpf}"
+                                 mask="999.999.999-99"/>
+
+                    <p:outputLabel for="cnpj">CNPJ: </p:outputLabel>
+                    <p:inputMask id="cnpj" 
+                                 value="#{pessoaBean.pessoaSelecionado.cnpj}"
+                                 mask="99.999.999/9999-99"/>
+
+
+                    <p:outputLabel for="ender">Endereço: </p:outputLabel>
+                    <p:inputText id="ender" 
+                                 value="#{pessoaBean.pessoaSelecionado.endereco}" 
+                                 size="80"/>
+
+                    <p:outputLabel for="bairo">Bairro: </p:outputLabel>
+                    <p:inputText id="bairo" 
+                                 value="#{pessoaBean.pessoaSelecionado.bairro}" 
+                                 size="80"/>
+
+                    <p:outputLabel for="cidade">Cidade: </p:outputLabel>
+                    <p:inputText id="cidade" 
+                                 value="#{pessoaBean.pessoaSelecionado.cidade}" 
+                                 size="80"/>
+
+                    <p:outputLabel for="grpsang">Grupo Sanguíneo: </p:outputLabel>
+                    <p:inputText id="grpsang" 
+                                 value="#{pessoaBean.pessoaSelecionado.grupoSanguineo}" 
+                                 size="2"/>
+
+                    <p:outputLabel for="rh">Fator Rh: </p:outputLabel>
+                    <p:inputText id="rh" 
+                                 value="#{pessoaBean.pessoaSelecionado.rhSanguineo}" 
+                                 size="1"/>
+
+                    <p:outputLabel for="obs">Observações: </p:outputLabel>
+                    <p:inputTextarea id="obs" 
+                                     value="#{pessoaBean.pessoaSelecionado.observacoes}"
+                                     cols="80"/>
+
+                    <p:outputLabel for="dtnasc">Data Nascimento: </p:outputLabel>
+                    <p:calendar id="dtnasc" 
+                                value="#{pessoaBean.pessoaSelecionado.dtNascimento}"
+                                pattern="dd/MM/yyyy"
+                                locale="pt"/>
+                </p:panelGrid>
+                <p:commandButton value="Gravar" action="#{pessoaBean.salvar()}" update="formPessoas :formList msg0"/>
+                <p:commandButton value="Excluir" onclick="cnf.show()"/>
+                <p:commandButton value="Cancelar" action="#{pessoaBean.cancelar()}" update="formPessoas :formList"/>
+
+                <p:confirmDialog id="confirma"
+                                 header="Confirma Exclusão"
+                                 widgetVar="cnf"
+                                 showEffect="fade"
+                                 hideEffect="explode"
+                                 position="top,center"
+                                 message="Confirma Exclusão do Pessoa?">  
+                    <h:panelGrid id="display" columns="2" cellpadding="4">  
+                        <h:outputText value="Id:" />  
+                        <h:outputText value="#{pessoaBean.pessoaSelecionado.id}" />  
+                        <h:outputText value="Descricao:" />  
+                        <h:outputText value="#{pessoaBean.pessoaSelecionado.descricao}" />  
+                    </h:panelGrid>  
+                    <p:commandButton value="Sim"
+                                     oncomplete="cnf.hide()" 
+                                     update="formPessoas :formList msg0"
+                                     action="#{pessoaBean.deletar()}" />  
+                    <p:commandButton value="Não" onclick="cnf.hide()"/>  
+                </p:confirmDialog>  
+            </h:form>
+        </p:fieldset>
+
+        <h:form id="formList">  
+            <p:dataTable var="registro" 
+                         value="#{pessoaBean.lista}"
+                         style="width: 100%"
+                         selectionMode="single" 
+                         rowKey="#{registro.id}"
+                         emptyMessage="Não há registros!"
+                         widgetVar="pessoaTable">
+
+                <p:ajax event="rowSelect"
+                        update=":formPessoas"
+                        listener="#{pessoaBean.onRowSelect}"/>  
+
+                <p:column headerText="Ativo" style="width: 5%; text-align: center"
+                          sortBy="#{registro.ativo}">
+                    <h:graphicImage name="#{registro.ativo}.png" 
+                                    library="images"
+                                    width="15" 
+                                    height="15"/>
+                </p:column>
+
+                <p:column headerText="Id" style="width: 5%; text-align: center"
+                          sortBy="#{registro.id}">
+                    <h:outputText value="#{registro.id}" />
+                </p:column>
+                <p:column headerText="Nome" style="width: 90%"
+                          sortBy="#{registro.descricao}"
+                          >
+                    <h:outputText value="#{registro.descricao}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -21,7 +21,7 @@
                                  required="true"
                                  requiredMessage="Descrição é obrigatório!"
                                  />
-                    <p:outputLabel for="descsexo">Ativo: </p:outputLabel>
+                    <p:outputLabel>Ativo: </p:outputLabel>
                     <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
                 </p:panelGrid>
                 <p:commandButton value="Gravar" action="#{sexoBean.salvar()}" update="formSexos :formList msg0"/>

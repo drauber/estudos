@@ -37,8 +37,7 @@
                         <p:inputText id="sexo0desc"
                                      value="TESTE"
                                      size="71"
-                                     disabled="true"
-                                     styleClass="descricaoCodigo"/> 
+                                     disabled="true"/> 
                     </p:panelGrid>
 
                     <p:outputLabel for="mail">E-mail: </p:outputLabel>
@@ -103,6 +102,10 @@
                                 value="#{pessoaBean.pessoaSelecionado.dtNascimento}"
                                 pattern="dd/MM/yyyy"
                                 locale="pt"/>
+
+                    <p:outputLabel>Ativo: </p:outputLabel>
+                    <h:selectBooleanCheckbox value="#{sexoBean.sexoSelecionado.ativo}" />
+
                 </p:panelGrid>
                 <p:commandButton value="Gravar" action="#{pessoaBean.salvar()}" update="formPessoas :formList msg0"/>
                 <p:commandButton value="Excluir" onclick="cnf.show()"/>
@@ -118,8 +121,8 @@
                     <h:panelGrid id="display" columns="2" cellpadding="4">  
                         <h:outputText value="Id:" />  
                         <h:outputText value="#{pessoaBean.pessoaSelecionado.id}" />  
-                        <h:outputText value="Descricao:" />  
-                        <h:outputText value="#{pessoaBean.pessoaSelecionado.descricao}" />  
+                        <h:outputText value="Nome:" />  
+                        <h:outputText value="#{pessoaBean.pessoaSelecionado.nome}" />  
                     </h:panelGrid>  
                     <p:commandButton value="Sim"
                                      oncomplete="cnf.hide()" 
@@ -156,9 +159,9 @@
                     <h:outputText value="#{registro.id}" />
                 </p:column>
                 <p:column headerText="Nome" style="width: 90%"
-                          sortBy="#{registro.descricao}"
+                          sortBy="#{registro.nome}"
                           >
-                    <h:outputText value="#{registro.descricao}" />
+                    <h:outputText value="#{registro.nome}" />
                 </p:column>
             </p:dataTable>
         </h:form>

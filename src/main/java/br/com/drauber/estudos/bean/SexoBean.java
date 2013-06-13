@@ -39,9 +39,9 @@ public class SexoBean {
             sexoSelecionado.setId(null);
         }
         FacesMessage m = sexoDAO.saveOrUpdate(sexoSelecionado);
-        FacesContext.getCurrentInstance().addMessage(null,m);
-        filtrar();
+        FacesContext.getCurrentInstance().addMessage(null, m);
         inserir();
+        filtrar();
         return PAGINA_LISTAGEM;
     }
 
@@ -61,7 +61,8 @@ public class SexoBean {
     }
 
     public String deletar() {
-        sexoDAO.delete(sexoSelecionado);
+        FacesMessage m = sexoDAO.delete(sexoSelecionado);
+        FacesContext.getCurrentInstance().addMessage(null, m);
         lista.remove(sexoSelecionado);
         sexoSelecionado = new Sexo();
         return PAGINA_LISTAGEM;

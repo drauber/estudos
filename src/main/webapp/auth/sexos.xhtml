@@ -42,7 +42,7 @@
                     </h:panelGrid>  
                     <p:commandButton value="Sim"
                                      oncomplete="cnf.hide()" 
-                                     update="formSexos :formList"
+                                      update="formSexos :formList msg0"
                                      action="#{sexoBean.deletar()}" />  
                     <p:commandButton value="Não" onclick="cnf.hide()"/>  
                 </p:confirmDialog>  
@@ -57,14 +57,6 @@
                          rowKey="#{registro.id}"
                          emptyMessage="Não há registros!"
                          widgetVar="sexoTable">
-
-                <f:facet name="header">
-                    <p:outputPanel>
-                        <h:outputText value="Qualquer campo:" />
-                        <h:inputText id="globalFilter" onkeyup="sexoTable.filter()" />
-                    </p:outputPanel>
-                </f:facet>
-
 
                 <p:ajax event="rowSelect"
                         update=":formSexos"

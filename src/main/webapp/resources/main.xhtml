@@ -32,10 +32,32 @@
                             <p:menuitem ajax="false" value="Sexos" action="#{sexoBean.inserir()}"  />
                         </p:submenu>  
                     </p:tieredMenu> 
-                    <p:themeSwitcher style="width:165px" id="defaultSwitcher">  
-                        <f:selectItem itemLabel="Choose Theme" itemValue="" />  
-                        <f:selectItems value="#{themeSwitcherBean.themes}" />  
-                    </p:themeSwitcher>                 </h:form>
+
+
+                    <p:dialog header="Sexos" 
+                              widgetVar="dlg_sexos" 
+                              position="top">
+                        <p:dataTable id="sex_template" 
+                                     var="s_template"
+                                     value="#{sexoBean.lista}" 
+                                     selection="#{sexoBean.sexoSelecionado}" 
+                                     selectionMode="single" 
+                                     rowKey="#{s_template.id}"
+                                     emptyMessage="Não há registros!">  
+                            <p:column headerText="Id" sortBy="#{s_template.id}">  
+                                #{s_template.id}  
+                            </p:column>  
+                            <p:column headerText="Descricao" sortBy="#{s_template.descricao}">  
+                                #{s_template.descricao}  
+                            </p:column>  
+                        </p:dataTable>  
+                    </p:dialog>
+
+
+
+
+
+                </h:form>
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Conteúdo</ui:insert>

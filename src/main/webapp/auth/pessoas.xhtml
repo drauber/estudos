@@ -32,7 +32,8 @@
                     <p:panelGrid id="s" columns="2" styleClass="semBorda">
                         <p:inputText id="sexo0"
                                      value="#{pessoaBean.pessoaSelecionado.sexo.id}"
-                                     size="6">
+                                     size="6"
+                                     onkeydown="if (event.keyCode == 113) {dlg_sexos.show()}">
                         </p:inputText>
                         <p:inputText id="sexo0desc"
                                      value="TESTE"
@@ -47,25 +48,27 @@
                                  required="false"/>
 
                     <p:outputLabel for="fone1">Fone: </p:outputLabel>
-                    <p:inputMask id="fone1" 
-                                 value="#{pessoaBean.pessoaSelecionado.fone1}" 
-                                 mask="(99) ?9999-9999"/>
+                    <p:outputLabel>
+                        <p:inputMask id="fone1" 
+                                     value="#{pessoaBean.pessoaSelecionado.fone1}" 
+                                     mask="(99) ?9999-9999"/>
 
-                    <p:outputLabel for="fone2">Fone Alternativo: </p:outputLabel>
-                    <p:inputMask id="fone2" 
-                                 value="#{pessoaBean.pessoaSelecionado.fone2}" 
-                                 mask="(99) ?9999-9999"/>
-
+                        <p:outputLabel for="fone2"> Fone Alternativo: </p:outputLabel>
+                        <p:inputMask id="fone2" 
+                                     value="#{pessoaBean.pessoaSelecionado.fone2}" 
+                                     mask="(99) ?9999-9999"/>
+                    </p:outputLabel>
                     <p:outputLabel for="cpf">CPF: </p:outputLabel>
-                    <p:inputMask id="cpf" 
-                                 value="#{pessoaBean.pessoaSelecionado.cpf}"
-                                 mask="999.999.999-99"/>
+                    <p:outputLabel>
+                        <p:inputMask id="cpf" 
+                                     value="#{pessoaBean.pessoaSelecionado.cpf}"
+                                     mask="999.999.999-99"/>
 
-                    <p:outputLabel for="cnpj">CNPJ: </p:outputLabel>
-                    <p:inputMask id="cnpj" 
-                                 value="#{pessoaBean.pessoaSelecionado.cnpj}"
-                                 mask="99.999.999/9999-99"/>
-
+                        <p:outputLabel for="cnpj"> CNPJ: </p:outputLabel>
+                        <p:inputMask id="cnpj" 
+                                     value="#{pessoaBean.pessoaSelecionado.cnpj}"
+                                     mask="99.999.999/9999-99"/>
+                    </p:outputLabel>
 
                     <p:outputLabel for="ender">Endereço: </p:outputLabel>
                     <p:inputText id="ender" 
@@ -83,25 +86,28 @@
                                  size="80"/>
 
                     <p:outputLabel for="grpsang">Grupo Sanguíneo: </p:outputLabel>
-                    <p:inputText id="grpsang" 
-                                 value="#{pessoaBean.pessoaSelecionado.grupoSanguineo}" 
-                                 size="2"/>
+                    <p:outputPanel>
+                        <p:inputText id="grpsang" 
+                                     value="#{pessoaBean.pessoaSelecionado.grupoSanguineo}" 
+                                     size="2"/>
 
-                    <p:outputLabel for="rh">Fator Rh: </p:outputLabel>
-                    <p:inputText id="rh" 
-                                 value="#{pessoaBean.pessoaSelecionado.rhSanguineo}" 
-                                 size="1"/>
+                        <p:outputLabel for="rh"> Fator Rh: </p:outputLabel>
+                        <p:inputText id="rh" 
+                                     value="#{pessoaBean.pessoaSelecionado.rhSanguineo}" 
+                                     size="1"/>
 
+                        <p:outputLabel for="dtnasc"> Data Nascimento: </p:outputLabel>
+                        <p:calendar id="dtnasc" 
+                                    value="#{pessoaBean.pessoaSelecionado.dtNascimento}"
+                                    pattern="dd/MM/yyyy"
+                                    locale="pt"/>
+
+                    </p:outputPanel>
                     <p:outputLabel for="obs">Observações: </p:outputLabel>
                     <p:inputTextarea id="obs" 
                                      value="#{pessoaBean.pessoaSelecionado.observacoes}"
                                      cols="80"/>
 
-                    <p:outputLabel for="dtnasc">Data Nascimento: </p:outputLabel>
-                    <p:calendar id="dtnasc" 
-                                value="#{pessoaBean.pessoaSelecionado.dtNascimento}"
-                                pattern="dd/MM/yyyy"
-                                locale="pt"/>
 
                     <p:outputLabel>Ativo: </p:outputLabel>
                     <h:selectBooleanCheckbox value="#{pessoaBean.pessoaSelecionado.ativo}" />
